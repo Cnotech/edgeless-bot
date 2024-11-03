@@ -32,7 +32,7 @@
     "gen": "ts-node ./scripts/genSchema.ts",
     "fmt": "prettier --write .",
     "lint": "eslint . --fix",
-    "prepare": "husky install && rm -r dist",
+    "prepare": "husky install && del /s /q dist",
     "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
