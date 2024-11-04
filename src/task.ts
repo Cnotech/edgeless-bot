@@ -370,6 +370,7 @@ async function execute(t: ExecuteParameter): Promise<Result<string, string>> {
           },
           true,
         ),
+        scraper_temp: t.task.scraper_temp,
         cd: t.task.parameter.resolver_cd ?? t.task.parameter.resolver_cd,
         password: t.info.resolverParameter?.password,
       },

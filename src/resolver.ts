@@ -93,6 +93,7 @@ export default async function (
     scriptPath: pRes.val,
     url,
     fileMatchRegex: p.fileMatchRegex,
+    scraper_temp: p.scraper_temp,
     cd: p.cd,
     password: p.password,
   };

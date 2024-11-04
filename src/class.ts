@@ -38,6 +38,7 @@ interface ScraperRegister {
 interface ResolverParameters {
   downloadLink: string;
   fileMatchRegex: string;
+  scraper_temp?: any;
   cd?: Array<string>;
   password?: string;
 }
@@ -189,6 +190,7 @@ interface WorkerDataResolver {
   scriptPath: string;
   url: string;
   fileMatchRegex: string;
+  scraper_temp?: any;
   cd?: Array<string>;
   password?: string;
 }

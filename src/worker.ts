@@ -112,6 +112,7 @@ async function resolver(
       res = (await awaitWithTimeout(script, LIGHT_TIMEOUT, {
         downloadLink: url,
         fileMatchRegex: workerData.fileMatchRegex,
+        scraper_temp: workerData.scraper_temp,
         cd: workerData.cd,
         password: workerData.password,
       })) as Result<ResolverReturned, string>;
