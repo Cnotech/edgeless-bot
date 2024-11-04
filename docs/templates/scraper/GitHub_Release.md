@@ -17,4 +17,8 @@
 
 ## 可选的参数
 
-无
+### allow_pre_release
+
+- 路径：`scraper_temp.allow_pre_release`
+- 类型：`boolean`
+- 说明：缺省状态下，模板会自动忽略预发布的 Release，设置为 `true` 则会将预发布的 Release 也纳入爬取范围

@@ -4,10 +4,15 @@ import { robustGet } from "../../src/network";
 import { coverSecret, log } from "../../src/utils";
 import { AxiosRequestConfig } from "axios";
 
+interface Temp {
+  allow_pre_release?: boolean;
+}
+
 export default async function (
   p: ResolverParameters,
 ): Promise<Result<ResolverReturned, string>> {
   const { downloadLink, fileMatchRegex } = p;
+  const temp: Temp | undefined = p.scraper_temp;
 
   // 获取Json
   let json: any;
@@ -31,12 +36,14 @@ export default async function (
   const regex = new RegExp(fileMatchRegex);
   let i = 0;
   // 过滤预发布
-  while (json[i]?.prerelease && i < json.length) {
-    i++;
-  }
-  // 防止越界
-  if (i == json.length) {
-    i = 0;
+  if (!(temp?.allow_pre_release ?? false)) {
+    while (json[i]?.prerelease && i < json.length) {
+      i++;
+    }
+    // 防止越界
+    if (i == json.length) {
+      i = 0;
+    }
   }
   const assets = json[i].assets;
   let result = "",

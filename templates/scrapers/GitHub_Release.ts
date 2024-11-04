@@ -4,6 +4,10 @@ import { ScraperParameters, ScraperReturned } from "../../src/class";
 import { AxiosRequestConfig } from "axios";
 import { coverSecret, log } from "../../src/utils";
 
+interface Temp {
+  allow_pre_release?: boolean;
+}
+
 function parseRepo(url: string): { owner: string; repo: string } {
   const splitRes = url.split("github.com/")[1].split("/");
   return {
@@ -17,6 +21,7 @@ export default async function (
 ): Promise<Result<ScraperReturned, string>> {
   const { url } = p,
     repoInfo = parseRepo(url);
+  const temp: Temp | undefined = p.scraper_temp;
 
   // 将API接口直接作为下载地址返回，后续会由GitHub Release下载模板解析
   const downloadLink = `https://api.github.com/repos/${repoInfo.owner}/${repoInfo.repo}/releases`;
@@ -45,12 +50,14 @@ export default async function (
   try {
     let i = 0;
     // 过滤预发布
-    while (json[i]?.prerelease && i < json.length) {
-      i++;
-    }
-    // 防止越界
-    if (i == json.length) {
-      i = 0;
+    if (!(temp?.allow_pre_release ?? false)) {
+      while (json[i]?.prerelease && i < json.length) {
+        i++;
+      }
+      // 防止越界
+      if (i == json.length) {
+        i = 0;
+      }
     }
     const version = json[i].tag_name;
     return new Ok({

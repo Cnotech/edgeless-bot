@@ -22,18 +22,19 @@ download_name = 'Notepad3_(\S+)_x64_Portable\.zip'
 [parameter]
 # resolver_cd = []
 # compress_level = 5
-build_manifest = ["${taskName}.wcs","${taskName}/Notepad3.exe"]
+build_manifest = ["${taskName}.wcs", "${taskName}/Notepad3.exe"]
 # build_cover = ""
 # build_delete = []
 
 # 爬虫模板临时参数
-# [scraper_temp]
+[scraper_temp]
+allow_pre_release = true
 
 # 自动制作模板要求的参数
 [producer_required]
 shortcutName = "Notepad3"
 sourceFile = "Notepad3.exe"
-recursiveUnzipList = [ ]
+recursiveUnzipList = []
 
 
 # 额外备注

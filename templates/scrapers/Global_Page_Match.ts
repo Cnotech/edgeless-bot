@@ -16,7 +16,7 @@ interface Temp {
 export default async function (
   p: ScraperParameters,
 ): Promise<Result<ScraperReturned, string>> {
-  const temp: Temp = p.scraper_temp;
+  const temp: Temp = p.scraper_temp || {};
   const vm = p.versionMatchRegex
       ? new RegExp(p.versionMatchRegex, "g")
       : /(\d+\.)+\d+/g,
