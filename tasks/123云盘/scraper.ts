@@ -8,6 +8,7 @@ export default async function (): Promise<Result<ScraperReturned, string>> {
       responseType: "json",
       headers: {
         platform: "pc",
+        "app-version": "109",
       },
     })
   ).unwrap();
