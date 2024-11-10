@@ -31,7 +31,7 @@
     "gen": "ts-node ./scripts/genSchema.ts",
     "fmt": "prettier --write .",
     "lint": "eslint . --fix",
-    "prepare": "husky && del /s /q dist",
+    "prepare": "husky && del /s /q dist && del database.json",
     "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
