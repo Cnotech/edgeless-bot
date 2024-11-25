@@ -37,6 +37,7 @@ recursiveUnzipList = ["$PLUGINSDIR", "app-64.7z"]
 
 
 # 额外备注
-# [extra]
+[extra]
 # require_windows = false
 # missing_version = ""
+weekly = true
