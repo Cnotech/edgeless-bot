@@ -1,7 +1,7 @@
 import { Err, Ok, Result } from "ts-results";
 import { ScraperParameters, ScraperReturned } from "../../src/types/class";
 import { robustGet } from "../../src/utils/network";
-import { Cmp, log, matchVersion, versionCmp } from "../../src/utils";
+import { Cmp, log, matchUrl, matchVersion, versionCmp } from "../../src/utils";
 import * as cheerio from "cheerio";
 import { AxiosRequestConfig } from "axios";
 
@@ -117,6 +117,16 @@ export default async function (
   if (downloadLink[0] == "/" && downloadLink[1] != "/") {
     downloadLink =
       new URL(temp.download_page_url ?? p.url).origin + downloadLink;
+  }
+
+  // 数据清洗
+  const clearVersionRes = matchVersion(version);
+  if (clearVersionRes.ok) {
+    version = clearVersionRes.val;
+  }
+  const downloadLinkRes = matchUrl(downloadLink);
+  if (downloadLinkRes.ok) {
+    downloadLink = downloadLinkRes.val;
   }
 
   return new Ok({
