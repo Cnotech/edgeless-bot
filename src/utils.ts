@@ -133,6 +133,16 @@ function matchVersion(text: string): Result<string, string> {
   return new Ok(matchRes[0]);
 }
 
+function matchUrl(text: string): Result<string, string> {
+  const regex =
+    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/i;
+  const matchRes = text.match(regex);
+  if (!matchRes || matchRes.length === 0) {
+    return new Err(`Error:Matched no url with ${text}"`);
+  }
+  return new Ok(matchRes[0]);
+}
+
 function isURL(str_url: string): boolean {
   return str_url.slice(0, 4) == "http";
 }
@@ -451,6 +461,7 @@ export {
   log,
   formatVersion,
   matchVersion,
+  matchUrl,
   isURL,
   getSizeString,
   getTimeString,
